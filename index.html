@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clocs</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Clocs</h1>
+  
+  <div class="section">
+    <div id="clocks-container" class="grid-container"></div>
+    <button id="add-clock-btn">Add</button>
+  </div>
+
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <h2 id="popup-clock-name"></h2>
+      <button id="rename-btn">Rename</button>
+      <p id="popup-time"></p>
+      
+      <!-- <button id="manage-people-btn">People</button> -->
+      <div id="manage-people">
+        <h3>In this time zone:</h3>
+        <ul id="people-list"></ul>
+        <input id="person-name-input" type="text" placeholder="Person"/>
+        <button id="add-person-btn">Add</button>
+      </div>
+
+      <div class="buttonHStack" id="delete-done">
+        <button id="delete-btn">Delete</button>
+        <button id="close-popup">Done</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="section">
+    <h2>Backup Data</h2>
+    <div class="buttonHStack">
+      <button id="export-data">Download</button>
+      <button id="import-data">Upload</button>
+    </div>
+    <input type="file" id="file-input" accept=".json" style="display:none;">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
