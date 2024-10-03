@@ -1,0 +1,16 @@
+{
+  "name": "Clocs - World Clock",
+  "short_name": "Clocs",
+  "description": "Clocs is a simple, lightweight, and easy to use world clock application that can be used to easily display time and friends in different time zones.",
+  "icons": [
+    {
+      "src": "/Icons/Icon.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000",
+  "theme_color": "#4B0082"
+}

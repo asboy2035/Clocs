@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Clocs</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clocs</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <h1>Clocs</h1>
+  <div id="title">
+    <h1>Clocs</h1>
+    <button id="add-clock-btn">Add</button>
+  </div>
   
   <div class="section">
     <div id="clocks-container" class="grid-container"></div>
-    <button id="add-clock-btn">Add</button>
   </div>
 
   <div id="popup" class="popup hidden">
@@ -20,7 +25,6 @@
       <button id="rename-btn">Rename</button>
       <p id="popup-time"></p>
       
-      <!-- <button id="manage-people-btn">People</button> -->
       <div id="manage-people">
         <h3>In this time zone:</h3>
         <ul id="people-list"></ul>

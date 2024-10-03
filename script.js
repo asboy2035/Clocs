@@ -55,12 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updatePeopleList = () => {
         peopleList.innerHTML = '';
-        selectedClock.people.forEach(person => {
+        selectedClock.people.forEach((person, index) => {
             const li = document.createElement('li');
             li.textContent = person;
-            peopleList.appendChild(li);
+    
+            // Create delete button for each person
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Remove';
+            deleteBtn.classList.add('remove-btn');
+            deleteBtn.addEventListener('click', () => {
+                selectedClock.people.splice(index, 1); // Remove person from the list
+                updatePeopleList(); // Update the display
+                saveClocksToLocalStorage(); // Save changes to localStorage
+            });
+    
+            li.appendChild(deleteBtn); // Add the delete button to the list item
+            peopleList.appendChild(li); // Add the list item to the people list
         });
-    };
+    };    
 
     const saveClocksToLocalStorage = () => {
         localStorage.setItem('worldClockData', JSON.stringify(clocks));
@@ -154,3 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
     loadClocksFromLocalStorage();
     setInterval(updateClocks, 1000);
 }); // Update clocks every second
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then((registration) => {
+        console.log('Service worker registered:', registration);
+      })
+      .catch((error) => {
+        console.error('Service worker registration failed:', error);
+      });
+  });
+} else {
+  console.log('Service workers are not supported.');
+}
