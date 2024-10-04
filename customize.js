@@ -27,11 +27,16 @@ saveCustomizeBtn.addEventListener('click', () => {
   // Get wallpaper file
   const wallpaperFile = wallpaperInput.files[0];
   if (wallpaperFile) {
-    // Store wallpaper in local storage
-    const wallpaperDataURL = URL.createObjectURL(wallpaperFile);
-    localStorage.setItem('wallpaper', wallpaperDataURL);
-    // Set wallpaper as background image
-    wallpaperContainer.style.backgroundImage = `url(${wallpaperDataURL})`;
+    // Read file as Base64-encoded string
+    const reader = new FileReader();
+    reader.onload = () => {
+      const wallpaperDataURL = reader.result;
+      // Store wallpaper in local storage
+      localStorage.setItem('wallpaper', wallpaperDataURL);
+      // Set wallpaper as background image
+      wallpaperContainer.style.backgroundImage = `url(${wallpaperDataURL})`;
+    };
+    reader.readAsDataURL(wallpaperFile);
   }
 
   // Get button color
