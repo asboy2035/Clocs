@@ -115,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clocks = clocks.filter(clock => clock !== selectedClock);
         popup.classList.add('hidden');
         updateClocks();
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('blur'));
     });
 
     closePopupBtn.addEventListener('click', () => {
