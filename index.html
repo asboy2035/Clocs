@@ -10,12 +10,12 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <div class="section">
   <div id="title">
     <h1>Clocs</h1>
     <button id="add-clock-btn">Add</button>
   </div>
   
-  <div class="section">
     <div id="clocks-container" class="grid-container"></div>
   </div>
 
@@ -54,9 +54,35 @@
       <button id="import-data">Upload</button>
     </div>
     <input type="file" id="file-input" accept=".json" style="display:none;">
+    <p style="opacity: 0.5;">Clocs 0.3</p>
   </div>
 
-  <p style="opacity: 0.5;">Clocs 0.2 (Build 2)</p>
+  <div class="section">
+  <!-- Customize button -->
+  <button id="customize-btn">Customize</button> 
+
+    <!-- Customize popup -->
+    <div id="customize-popup" class="popup hidden">
+      <h2>Customize</h2>
+      <div class="popup-section">
+        <h3>Wallpaper</h3>
+        <input type="file" id="wallpaper-input" accept="image/*">
+        <label>
+          <input type="checkbox" id="blur-wallpaper">
+          Blur wallpaper
+        </label>
+      </div>
+      <div class="popup-section">
+        <h3>Button Color</h3>
+        <input type="color" id="button-color-picker" value="#ffffff">
+      </div>
+      <button id="save-customize-btn">Save</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
+  <script src="customize.js" defer></script>
+  <!-- Wallpaper container -->
+  <div id="wallpaper-container"></div>
 </body>
 </html>

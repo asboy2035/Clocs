@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
         popupTime.textContent = getTimeForOffset(clock.offset).toLocaleTimeString();
         updatePeopleList();
         popup.classList.remove('hidden');
+        document.querySelectorAll('.section').forEach(section => section.classList.add('blur'));
     };
 
     const updatePeopleList = () => {
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closePopupBtn.addEventListener('click', () => {
         popup.classList.add('hidden');
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('blur'));
     });
 
     addPersonBtn.addEventListener('click', () => {
