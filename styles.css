@@ -32,6 +32,18 @@ button, input {
   border: none;
   border-radius: 0.5rem;
 }
+input {
+  background: none;
+  color: black;
+  opacity: 0.5;
+}
+h1 {
+  margin: 0;
+}
+ul {
+  max-height: 10rem;
+  overflow-y: scroll;
+}
 
 /* Components */
 .section {
@@ -66,10 +78,13 @@ button, input {
 }
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: env(safe-area-inset-top, 0); /* Adjust for top safe area */
+  left: env(safe-area-inset-left, 0); /* Adjust for left safe area */
+  right: env(safe-area-inset-right, 0); /* Adjust for right safe area */
+  bottom: env(safe-area-inset-bottom, 0); /* Adjust for bottom safe area */
+  width: 100vw;
+  height: 100vh;
+
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9;
   backdrop-filter: blur(0.5rem);
@@ -78,6 +93,9 @@ button, input {
   animation-fill-mode: forwards;
 }
 .popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   text-align: center;
   position: fixed;
   top: 6rem;
@@ -88,19 +106,37 @@ button, input {
   box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.2);
   border-radius: 1.75rem;
   z-index: 10;
-  animation: slideTop forwards 0.3s ease-in-out;
+  animation: opacityBlur forwards 0.3s ease-in-out;
   animation-fill-mode: forwards;
 }
 .remove-btn {
   margin-left: 0.25rem;
   scale: 0.7;
 }
-@keyframes slideTop {
+.remove-btn > svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.text-btn {
+  background: none !important;
+}
+.popup-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+@keyframes opacityBlur {
   0% {
-    top: -6rem;
+    opacity: 0.25;
+    filter: blur(0.5rem);
+    filter: blur(0.5rem);
   }
   100% {
-    top: 6rem;
+    opacity: 1;
+    filter: none;
+    -webkit-filter: none;
   }
 }
 @keyframes blur {
@@ -123,9 +159,6 @@ button, input {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-#title > h1 {
-  margin: 0;
 }
 #people-list {
   list-style: none;
@@ -152,10 +185,19 @@ button, input {
   bottom: -4rem;
   z-index: 9;
 }
+#rename-btn > svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+}
+#rename-btn {
+  background: none !important;
+  padding: none !important;
+}
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-  body, .clock, .popup {
+  body, input, .clock, .popup {
     color: white;
   }
   body {
@@ -165,10 +207,21 @@ button, input {
   .clock, .buttonHStack, .popup-content {
     background-color: rgb(33, 33, 33);
   }
+  #close-popup {
+    color: rgb(66, 75, 255) !important;
+  }
 }
 
 @media (max-width: 37rem) {
   .popup-content {
     width: calc(100% - 6rem);
+  }
+}
+@media (min-width: 37rem) {
+  .popup-content {
+    flex-direction: row;
+  }
+  #popup-clock-name {
+    font-size: xx-large;
   }
 }
