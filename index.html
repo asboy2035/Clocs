@@ -3,86 +3,61 @@
 <head>
   <title>Clocs</title>
   <meta charset="UTF-8">
+  <link rel="icon" href="./Icons/Icon.png" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <link rel="stylesheet" href="styles.css">
   <link rel="manifest" href="manifest.json">
+  <script src="./script.js" defer></script>
 </head>
 <body>
-  <div class="section">
-  <div id="title">
+  <div class="hStack">
     <h1>Clocs</h1>
     <button id="add-clock-btn">Add</button>
   </div>
   
-    <div id="clocks-container" class="grid-container"></div>
-  </div>
+  <div id="clocks-container" class="grid-container"></div>
 
+<!--  Clock detail view-->
   <div id="popup" class="popup hidden">
     <div class="popup-content">
-      <div class="popup-section">
-        <div id="title" style="margin-top: 0 !important; justify-content: center;">
-          <h1 id="popup-clock-name" style="margin-left: 0.5rem;"></h1>
-          <button id="rename-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="m11.4 18.161l7.396-7.396a10.3 10.3 0 0 1-3.326-2.234a10.3 10.3 0 0 1-2.235-3.327L5.839 12.6c-.577.577-.866.866-1.114 1.184a6.6 6.6 0 0 0-.749 1.211c-.173.364-.302.752-.56 1.526l-1.362 4.083a1.06 1.06 0 0 0 1.342 1.342l4.083-1.362c.775-.258 1.162-.387 1.526-.56q.647-.308 1.211-.749c.318-.248.607-.537 1.184-1.114m9.448-9.448a3.932 3.932 0 0 0-5.561-5.561l-.887.887l.038.111a8.75 8.75 0 0 0 2.092 3.32a8.75 8.75 0 0 0 3.431 2.13z"/></svg>
-          </button>
-        </div>
-        <p id="popup-time"></p>
+      <div class="hStack">
+        <h1 id="popup-clock-name"></h1>
+        <button id="rename-btn" class="transparent">
+          <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><g fill="none"><path d="m12.594 23.258l-.012.002l-.071.035l-.02.004l-.014-.004l-.071-.036q-.016-.004-.024.006l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.016-.018m.264-.113l-.014.002l-.184.093l-.01.01l-.003.011l.018.43l.005.012l.008.008l.201.092q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.003-.011l.018-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M18.293 17.293a1 1 0 0 1 1.497 1.32l-.083.094l-1.5 1.5a3.12 3.12 0 0 1-4.414 0a1.12 1.12 0 0 0-1.488-.087l-.098.087l-.5.5a1 1 0 0 1-1.497-1.32l.083-.094l.5-.5a3.12 3.12 0 0 1 4.414 0a1.12 1.12 0 0 0 1.488.087l.098-.087zm-1.81-13.31A2.5 2.5 0 0 1 20.14 7.39l-.122.13L8.442 19.095a1.5 1.5 0 0 1-.505.333l-.145.049l-2.837.807a1 1 0 0 1-1.262-1.13l.025-.107l.807-2.838a1.5 1.5 0 0 1 .28-.536l.102-.114z"/></g></svg>
+        </button>
       </div>
 
-      <div class="popup-section style="padding: 0.25rem 1rem;">
-        <div id="manage-people">
-          <h3>In this time zone:</h3>
-          <ul id="people-list"></ul>
-          <input id="person-name-input" type="text" placeholder="Person"/>
-          <button id="add-person-btn">Add</button>
-        </div>
+      <div id="manage-people">
+        <h3>In this time zone:</h3>
+        <ul id="people-list"></ul>
+        <label for="person-name-input" class="light">Name:</label>
+        <input id="person-name-input" type="text" placeholder="Person"/>
+        <button id="add-person-btn">Add</button>
       </div>
 
-      <div class="buttonHStack" id="delete-done">
-        <button id="delete-btn" class="text-btn" style="color: red;">Delete</button>
-        <button id="close-popup" class="text-btn" style="color: blue; font-weight: bold;">Done</button>
+      <div class="hStack" id="delete-done">
+        <button id="delete-btn" class="text-btn">
+          Delete
+        </button>
+        <button id="close-popup" class="text-btn">
+          Done
+        </button>
       </div>
     </div>
   </div>
-  
+
+<!--  Data Management-->
   <div class="section">
     <h2>Backup Data</h2>
-    <div class="buttonHStack">
+    <div class="hStack">
       <button id="export-data">Download</button>
       <button id="import-data">Upload</button>
     </div>
     <input type="file" id="file-input" accept=".json" style="display:none;">
-    <p style="opacity: 0.5;">Clocs 0.3</p>
+    <p class="light">Clocs 0.3</p>
   </div>
-
-  <div class="section">
-  <!-- Customize button -->
-  <button id="customize-btn">Customize</button> 
-
-    <!-- Customize popup -->
-    <div id="customize-popup" class="popup hidden">
-      <h2>Customize</h2>
-      <div class="popup-section">
-        <h3>Wallpaper</h3>
-        <input type="file" id="wallpaper-input" accept="image/*">
-        <label>
-          <input type="checkbox" id="blur-wallpaper">
-          Blur wallpaper
-        </label>
-      </div>
-      <div class="popup-section">
-        <h3>Button Color</h3>
-        <input type="color" id="button-color-picker" value="#ffffff">
-      </div>
-      <button id="save-customize-btn">Save</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script src="customize.js" defer></script>
-  <!-- Wallpaper container -->
-  <div id="wallpaper-container"></div>
-</body>
+  </body>
 </html>

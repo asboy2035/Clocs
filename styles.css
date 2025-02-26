@@ -1,104 +1,126 @@
 :root {
   --safe-area-inset-top: env(safe-area-inset-top);
-  --accent-color: indigo;
+  --background-color: white;
+  --foreground-color: rgba(226, 226, 226, 0.6);
+  --text-color: black;
+  --accent-color: #612ed9;
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   display: flex;
   gap: 1.5rem;
   flex-direction: column;
-  align-items: left;
-  padding: 1rem;
-  padding-top: var(--safe-area-inset-top);
-  background-color: #f0f0f0;
+  align-items: flex-start;
+  padding: 4rem 1rem;
+  margin: var(--safe-area-inset-top) 0 0;
+  max-width: 75rem;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background: var(--background-color);
+  color: var(--text-color);
   user-select: none;
   -webkit-user-select: none;
-  margin: none;
-  background-clip: cover;
-  background-repeat: no-repeat;
-  background-position: fixed;
 }
+
 button {
-  cursor: pointer;
+  display: flex;
+
   font-size: medium;
-  background-color: var(--accent-color);
-  color: white;
-  transition: background-color 0.2s ease-in-out;
-  width: auto; 
-  align-self: flex-start; 
+  background: var(--foreground-color);
+  border-radius: 0.75rem;
+  color: var(--text-color);
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
 }
 button:hover {
-  background-color: darkblue;
+  scale: 1.1;
+}
+button:active {
+  scale: 1.05;
 }
 button, input {
   padding: 0.5rem 0.75rem;
   border: none;
-  border-radius: 0.5rem;
 }
+button svg {
+  width: 1.5rem;
+  color: var(--text-color);
+}
+
 input {
   background: none;
-  color: black;
+  color: var(--text-color);
   opacity: 0.5;
 }
-h1 {
-  margin: 0;
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0.5rem 0;
 }
+
 ul {
   max-height: 10rem;
   overflow-y: scroll;
 }
 
 /* Components */
-.buttonHStack, .clock, .popup-content {
-  background-color: rgba(255, 255, 255, 0.5);
-  border: #f0f0f036 0.2rem solid;
-  backdrop-filter: blur(0.5rem);
-  -webkit-backdrop-filter: blur(0.5rem);
+.clock, .popup-content {
+  background-color: var(--foreground-color);
 }
+
 .section {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-}
-.people {
-  opacity: 0.5;
-}
-.buttonHStack {
-  display: flex;
-  gap: 0.625rem;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  width: auto; 
-  align-self: flex-start; 
-}
-.clock {
   padding: 1rem;
-  border-radius: 2rem;
-  text-align: center;
-  cursor: pointer;
-  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+
+  background: var(--foreground-color);
+  border-radius: 1.5rem;
+}
+
+.hStack {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+  border-radius: 1.5rem;
+  text-align: left;
+
   width: 9rem;
-  height: 9rem;
   overflow: scroll;
   flex-grow: 1;
   flex-shrink: 1;
+  cursor: pointer;
+}
+.popup {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  height: calc(var(--safe-area-inset-top) + 100vh);
+  width: 100vw;
+  top: 0;
+  right: 0;
+
+  background: var(--foreground-color);
+  backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
+  z-index: 5;
 }
 .popup-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  text-align: center;
-  position: fixed;
-  top: 6rem;
-  left: 50%;
-  transform: translateX(-50%);
   padding: 1.25rem;
-  box-shadow: 0 0 0.9375rem rgba(0, 0, 0, 0.2);
   border-radius: 1.75rem;
-  z-index: 10;
-  animation: opacityBlur forwards 0.3s ease-in-out;
-  animation-fill-mode: forwards;
 }
 .remove-btn {
   margin-left: 0.25rem;
@@ -111,75 +133,35 @@ ul {
 .text-btn {
   background: none !important;
 }
-.popup-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: center;
-  align-items: center;
-}
-.blur {
-  filter: blur(0.5rem);
-  -webkit-filter: blur(0.5rem);
-  opacity: 0.75;
-}
-@keyframes opacityBlur {
-  0% {
-    opacity: 0.25;
-    filter: blur(0.5rem);
-    filter: blur(0.5rem);
-  }
-  100% {
-    opacity: 1;
-    filter: none;
-    -webkit-filter: none;
-  }
-}
 .hidden {
   display: none;
 }
+.light {
+  opacity: 0.7;
+}
 
 /* Items */
-#title {
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 #people-list {
   list-style: none;
   padding: 0;
 }
 #delete-btn, .remove-btn {
-  background-color: red;
+  color: red;
 }
 #delete-btn:hover, .remove-btn:hover {
-  background-color: darkred;
+  color: darkred;
 }
 #clocks-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
-  margin-bottom: 1.25rem;
-  margin: auto;
-}
-#delete-done {
-  position: absolute;
-  transform: translateX(-50%);
-  left: 50%;
-  bottom: -4rem;
-  z-index: 9;
+  margin: auto auto 1.25rem;
 }
 #rename-btn > svg {
   width: 1.5rem;
   height: 1.5rem;
   padding: 0;
-}
-#rename-btn {
-  background: none !important;
-  padding: none !important;
-  color: black;
 }
 #button-color-picker {
   width: 2rem;
@@ -188,53 +170,12 @@ ul {
   padding: 0;
   margin: 0;
 }
-/* Wallpaper container */
-#wallpaper-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100vw + 4rem);
-  height: calc(100vh + 4rem);
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-}
 
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
-  body, input, .clock, .popup {
-    color: white;
-  }
-  body {
-    background-color: black;
-  }
-
-  .buttonHStack, .clock, .popup-content {
-    background-color: rgba(30, 30, 30, 0.5);
-    border: #2d2d2d36 0.2rem solid;
-    backdrop-filter: blur(0.5rem);
-    -webkit-backdrop-filter: blur(0.5rem);
-  }
-  #close-popup {
-    color: rgb(66, 75, 255) !important;
-  }
-  #rename-btn {
-    color: white;
-  }
-}
-
-@media (max-width: 37rem) {
-  .popup-content {
-    width: calc(100% - 6rem);
-  }
-}
-@media (min-width: 37rem) {
-  .popup-content {
-    flex-direction: row;
-  }
-  #popup-clock-name {
-    font-size: xx-large;
+  :root {
+    --background-color: black;
+    --foreground-color: rgba(45, 45, 45, 0.6);
+    --text-color: rgb(240, 240, 240);
   }
 }

@@ -3,12 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addClockBtn = document.getElementById('add-clock-btn');
     const popup = document.getElementById('popup');
     const popupClockName = document.getElementById('popup-clock-name');
-    const popupTime = document.getElementById('popup-time');
-    const managePeopleBtn = document.getElementById('manage-people-btn');
     const renameBtn = document.getElementById('rename-btn');
     const deleteBtn = document.getElementById('delete-btn');
     const closePopupBtn = document.getElementById('close-popup');
-    const managePeople = document.getElementById('manage-people');
     const peopleList = document.getElementById('people-list');
     const personNameInput = document.getElementById('person-name-input');
     const addPersonBtn = document.getElementById('add-person-btn');
@@ -34,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
             clockDiv.className = 'clock';
             clockDiv.dataset.index = index;
             clockDiv.innerHTML = `
-                <h2>${clock.name}</h2><br>
-                ${getTimeForOffset(clock.offset).toLocaleTimeString()}<br>
-                <p class="people">${clock.people.length > 0 ? clock.people.join(', ') : '-'}</p>
+                <h2>${clock.name}</h2>
+                <h3>${getTimeForOffset(clock.offset).toLocaleTimeString()}</h3>
+                <p class="light">${clock.people.length > 0 ? clock.people.join(', ') : '-'}</p>
             `;
             clockDiv.addEventListener('click', () => openPopup(clock));
             clocksContainer.appendChild(clockDiv);
@@ -48,10 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const openPopup = (clock) => {
         selectedClock = clock;
         popupClockName.textContent = clock.name;
-        popupTime.textContent = getTimeForOffset(clock.offset).toLocaleTimeString();
         updatePeopleList();
         popup.classList.remove('hidden');
-        document.querySelectorAll('.section').forEach(section => section.classList.add('blur'));
     };
 
     const updatePeopleList = () => {
@@ -157,8 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const importedData = JSON.parse(e.target.result);
-                clocks = importedData;
+                clocks = JSON.parse(e.target.result);
                 updateClocks();
             };
             reader.readAsText(file);
